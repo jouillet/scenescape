@@ -41,33 +41,31 @@ jobs:
     name: "Build Toplevel Documentation"
     needs: filter
     if: ${{ needs.filter.outputs.toplevel_changed == 'true' }}
-    uses: ./.github/actions/docs-build
-    secrets:
+    uses: ./.github/actions/docs-build@introducing-per-repo-docs-build-workflow
+    with:
       SYS_ORCH_GITHUB: ${{ secrets.SYS_ORCH_GITHUB }}
       DOC_AWS_ACCESS_KEY_ID: ${{ secrets.DOC_AWS_ACCESS_KEY_ID }}
       DOC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_AWS_SECRET_ACCESS_KEY }}
-    with:
       exclude_patterns: "README.md, adr, design, development"
+      
   build_autocalibration:
     name: "Build Autocalibration Documentation"
     needs: filter
     if: ${{ needs.filter.outputs.autocalibration_changed == 'true' }}
-    uses: ./.github/actions/docs-build
-    secrets:
+    uses: ./.github/actions/docs-build@introducing-per-repo-docs-build-workflow
+    with:
       SYS_ORCH_GITHUB: ${{ secrets.SYS_ORCH_GITHUB }}
       DOC_AWS_ACCESS_KEY_ID: ${{ secrets.DOC_AWS_ACCESS_KEY_ID }}
       DOC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_AWS_SECRET_ACCESS_KEY }}
-    with:
       docs_directory: autocalibration
 
   build_controller:
     name: "Build Controller Documentation"
     needs: filter
     if: ${{ needs.filter.outputs.controller_changed == 'true' }}
-    uses: ./.github/actions/docs-build
-    secrets:
+    uses: ./.github/actions/docs-build@introducing-per-repo-docs-build-workflow
+    with:
       SYS_ORCH_GITHUB: ${{ secrets.SYS_ORCH_GITHUB }}
       DOC_AWS_ACCESS_KEY_ID: ${{ secrets.DOC_AWS_ACCESS_KEY_ID }}
       DOC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DOC_AWS_SECRET_ACCESS_KEY }}
-    with:
       docs_directory: controller
